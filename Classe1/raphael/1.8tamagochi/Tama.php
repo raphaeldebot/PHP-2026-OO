@@ -8,6 +8,11 @@ class Tama
     ) {
         $this->nom = $nom;
     }
+    // constantes
+    const int FAIM_MINIMUM = 0;
+
+    const int FAIM_MAXIMUM = 100;
+
 
     public function getFaim(): int
     {
@@ -16,12 +21,12 @@ class Tama
 
     public function manger()
     {
-        return $this->borner($this->faim - 20);
+        $this->faim = $this->borner($this->faim - 20);
     }
 
     public function jouer()
     {
-        $this->borner($this->faim + 15);
+        $this->faim = $this->borner($this->faim + 15);
     }
 
     public function etat()
@@ -32,6 +37,7 @@ class Tama
 
     private function borner(int $valeur): int
     {
-        return max(0, min(100, $valeur));
+        return max(0,self::FAIM_MINIMUM,min(self::FAIM_MAXIMUM, $valeur));
     }
 }
+
